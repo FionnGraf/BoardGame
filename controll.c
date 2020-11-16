@@ -32,7 +32,7 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
         if (wp < 10000) {
             DestroyButton(wp);
             LoadBitMap(hWnd, wp);
-            test = CheckWinner(wp,  boardWidth, boardHeight);
+            test = CheckBoard(wp,  boardWidth, boardHeight);
             if (test == 1) {
                 printf("%i won\n", player);
             }
