@@ -32,12 +32,22 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
         if (wp < 10000) {
             DestroyButton(wp);
             LoadBitMap(hWnd, wp);
-            test = CheckWinner(wp,  boardWidth, boardHeight);
-            if (test == 1) {
-                printf("%i won\n", player);
+            if (CheckWinner(wp, boardWidth, boardHeight) == 1) {
+                if (player == 1) {
+                    if (MessageBoxW(hWnd, L"Player 1 Won", L"Winner", MB_OK) == IDOK) {
+                        ResetBoard(hWnd, boardWidth, boardHeight);
+                    }
+                }
+                else {
+                    if (MessageBoxW(hWnd, L"Player 2 Won", L"Winner", MB_OK) == IDOK) {
+                        ResetBoard(hWnd, boardWidth, boardHeight);
+                    }
+                }
             }
             else if (test == 2) {
-                printf("draw");
+                if (MessageBoxW(hWnd, L"Draw", L"Winner", MB_OK) == IDOK) {
+                    ResetBoard(hWnd, boardWidth, boardHeight);
+                }
             }
         }
 
