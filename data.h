@@ -2,5 +2,5 @@
 #define DATA_H
 #endif
 
-int CheckWinner(int coord, int width, int height);
-boolean checkDirection(int player, int deltaX, int deltaY);
+int CheckBoard(int coord, int width, int height);
+boolean CheckDirection(int player, int deltaX, int deltaY);
