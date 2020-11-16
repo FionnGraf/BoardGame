@@ -1,0 +1,5 @@
+#ifndef CONTROLL_H
+#define CONTROLL_H
+#endif
+
+LRESULT CALLBACK WinProc(HWND, UINT, WPARAM, LPARAM);
