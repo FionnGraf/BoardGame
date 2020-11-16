@@ -40,7 +40,7 @@ int CheckBoard(int coord, int width, int height) {
         if (CheckDirection(board[x][y], x - i, y)) {
             counter[1]++;
         }
-        if (counter == winAmount) {
+        if (counter[1] == winAmount) {
             return 1;
         }
     }
@@ -53,7 +53,7 @@ int CheckBoard(int coord, int width, int height) {
         if (CheckDirection(board[x][y], x - i, y - i)) {
             counter[2]++;
         }
-        if (counter == winAmount) {
+        if (counter[2] == winAmount) {
             return 1;
         }
     }
@@ -66,7 +66,7 @@ int CheckBoard(int coord, int width, int height) {
         if (CheckDirection(board[x][y], x - i, y + i)) {
             counter[3]++;
         }
-        if (counter == winAmount) {
+        if (counter[3] == winAmount) {
             return 1;
         }
     }

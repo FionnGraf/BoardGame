@@ -2,8 +2,8 @@
 #define DEFINES_H
 #endif 
 
-#define boardHeight 6
-#define boardWidth 8
+#define boardHeight 3
+#define boardWidth 3
 #define buttonSize 60
 #define winAmount 3
 
