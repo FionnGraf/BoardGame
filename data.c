@@ -16,65 +16,35 @@ int CheckWinner(int coord, int width, int height) {
     int x = coord / 100;
     int y = coord % 100;
     moveCount++;
+    int counter = 0;
     
     //check vertical
-    int lineCount = 0;
-    for (int i = 0; i < boardHeight; i++) {
-        if (board[x][i] == board[x][y]) {
-            lineCount++;
-        }
-        else {
-            lineCount = 0;;
-        }
-        if (lineCount == winAmount) {
-            return 1;
+    for (int i = 1; i < boardHeight; i++) {
+        if (checkDirection(board[x][y], x, y + i)) {
+            counter++;
         }
     }
-    
+
     //check horizontal
-    lineCount = 0;
-    for (int i = 0; i < boardHeight; i++) {
-        if (board[i][y] == board[x][y]) {
-            lineCount++;
-        }
-        else {
-            lineCount = 0;;
-        }
-        if (lineCount == winAmount) {
-            return 1;
-        }
-    }
+
 
     //check diagonal
-    lineCount = 0;
-    for (int i = 0; i < boardHeight; i++) {
-        if (board[i + x - y][i] != board[x][y]) {
-            lineCount = 0;
-        }
-        else {
-            lineCount++;
-        }
-        if (lineCount == winAmount) {
-            return 1;
-        }
-    }
+
 
     //check anti diagonal
-    lineCount = 0;
-    for (int i = 0; i < boardHeight; i++) {
-        if (board[i + x - y][boardHeight - i - 1] != board[x][y]) {
-            lineCount = 0;
-        }
-        else {
-            lineCount++;
-        }
-        if (lineCount == winAmount) {
-            return 1;
-        }
-    }
     
+
     if (moveCount == height * width){
         return 2;
     }
     //return 0;
+}
+
+boolean checkDirection(int player, int deltaX, int deltaY) {
+    if (board[deltaX][deltaY] == player) {
+        return TRUE;
+    }
+    else {
+        return FALSE;
+    }
 }
