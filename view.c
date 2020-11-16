@@ -16,6 +16,7 @@ HBITMAP hBMPo;
 HWND hBMP[99][99];
 int player = 0;
 int board[99][99] = { 0 };
+extern int moveCount;
 
 // Funktionen ---------------------------------------------------------------------------
 
@@ -139,6 +140,7 @@ void DeleteBoard() {
             else if(board[x][y] == 1){
                 DestroyButton((x * 100) + y);
             }
+            board[x][y] = 0;
         }
     }
 }
@@ -150,4 +152,5 @@ void LoadBoard(HWND hWnd) {
 void ResetBoard(HWND hWnd, int width, int height) {
     DeleteBoard();
     CreateBoard(hWnd, width, height);
+    moveCount = 0;
 }

@@ -32,7 +32,8 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
         if (wp < 10000) {
             DestroyButton(wp);
             LoadBitMap(hWnd, wp);
-            if (CheckWinner(wp, boardWidth, boardHeight) == 1) {
+            switch(CheckBoard(wp, boardWidth, boardHeight)){
+            case 1:
                 if (player == 1) {
                     if (MessageBoxW(hWnd, L"Player 1 Won", L"Winner", MB_OK) == IDOK) {
                         ResetBoard(hWnd, boardWidth, boardHeight);
@@ -43,13 +44,16 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
                         ResetBoard(hWnd, boardWidth, boardHeight);
                     }
                 }
-            }
-            else if (test == 2) {
+                break;
+                
+            case 2:
                 if (MessageBoxW(hWnd, L"Draw", L"Winner", MB_OK) == IDOK) {
                     ResetBoard(hWnd, boardWidth, boardHeight);
                 }
+                break;
             }
-        }
+            }
+        
 
         break;
     case WM_CREATE:
