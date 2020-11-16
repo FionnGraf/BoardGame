@@ -68,7 +68,8 @@ void AddMenus(HWND hWnd) {
 
     AppendMenuA(hMenu, MF_POPUP, (UINT_PTR)ToolMenu, "Tools");
     AppendMenuA(ToolMenu, MF_POPUP, Tools_Menu_Reset, "Reset");
-    AppendMenuA(hMenu, MF_STRING, 2, "Help");
+
+    AppendMenuA(hMenu, MF_STRING, Help, "Help");
 
     SetMenu(hWnd, hMenu);
 }

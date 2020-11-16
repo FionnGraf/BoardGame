@@ -11,3 +11,4 @@
 #define File_Menu_New 10002
 #define File_Menu_Open 10003
 #define Tools_Menu_Reset 10004
+#define Help 10005

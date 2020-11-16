@@ -15,61 +15,62 @@ int test = 0;
 
 LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
     switch (msg) {
-    case WM_COMMAND:
-
-        switch (wp) {
-        case File_Menu_Exit:
-            DestroyWindow(hWnd);
-            break;
-        case File_Menu_New:
-            MessageBeep(MB_ICONINFORMATION);
-            break;
-        case Tools_Menu_Reset:
-            ResetBoard(hWnd, boardWidth, boardHeight);
-            break;
-        }
-
-        if (wp < 10000) {
-            DestroyButton(wp);
-            LoadBitMap(hWnd, wp);
-            switch(CheckBoard(wp, boardWidth, boardHeight)){
-            case 1:
-                if (player == 1) {
-                    if (MessageBoxW(hWnd, L"Player 1 Won", L"Winner", MB_OK) == IDOK) {
-                        ResetBoard(hWnd, boardWidth, boardHeight);
-                    }
-                }
-                else {
-                    if (MessageBoxW(hWnd, L"Player 2 Won", L"Winner", MB_OK) == IDOK) {
-                        ResetBoard(hWnd, boardWidth, boardHeight);
-                    }
-                }
+        case WM_COMMAND:
+            switch (wp) {
+            case File_Menu_Exit:
+                DestroyWindow(hWnd);
                 break;
+            case File_Menu_New:
+                MessageBeep(MB_ICONINFORMATION);
+                break;
+            case Tools_Menu_Reset:
+                ResetBoard(hWnd, boardWidth, boardHeight);
+                break;
+            case Help:
+
+                break;
+            }
+
+            if (wp < 10000) {
+                DestroyButton(wp);
+                LoadBitMap(hWnd, wp);
+                switch(CheckBoard(wp, boardWidth, boardHeight)){
+                case 1:
+                    if (player == 1) {
+                        if (MessageBoxW(hWnd, L"Player 1 Won", L"Winner", MB_OK) == IDOK) {
+                            ResetBoard(hWnd, boardWidth, boardHeight);
+                        }
+                    }
+                    else {
+                        if (MessageBoxW(hWnd, L"Player 2 Won", L"Winner", MB_OK) == IDOK) {
+                            ResetBoard(hWnd, boardWidth, boardHeight);
+                        }
+                    }
+                    break;
                 
-            case 2:
-                if (MessageBoxW(hWnd, L"Draw", L"Winner", MB_OK) == IDOK) {
-                    ResetBoard(hWnd, boardWidth, boardHeight);
+                case 2:
+                    if (MessageBoxW(hWnd, L"Draw", L"Winner", MB_OK) == IDOK) {
+                        ResetBoard(hWnd, boardWidth, boardHeight);
+                    }
+                    break;
                 }
-                break;
             }
-            }
-        
+            break;
 
-        break;
-    case WM_CREATE:
-        AddMenus(hWnd);
-        CreateBoard(hWnd, boardWidth, boardHeight);
-        break;
+        case WM_CREATE:
+            AddMenus(hWnd);
+            CreateBoard(hWnd, boardWidth, boardHeight);
+            break;
 
-    case WM_DESTROY:
-        PostQuitMessage(0);
-        break;
+        case WM_DESTROY:
+            PostQuitMessage(0);
+            break;
 
-    case WM_EXITSIZEMOVE:
+        case WM_EXITSIZEMOVE:
 
-        break;
+            break;
 
-    default:
-        return DefWindowProcW(hWnd, msg, wp, lp);
+        default:
+            return DefWindowProcW(hWnd, msg, wp, lp);
     }
 }
