@@ -32,6 +32,10 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
             case Help:
                 Settings(hWnd, settingsSize, settingsSize);
                 break;
+            case Tools_Menu_Settings_Exit:
+                DeleteSettings();
+                CreateBoard(hWnd, boardWidth, boardHeight);
+                break;
             }
 
             if (wp < 10000) {
