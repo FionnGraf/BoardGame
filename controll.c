@@ -26,8 +26,11 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
             case Tools_Menu_Reset:
                 ResetBoard(hWnd, boardWidth, boardHeight);
                 break;
+            case Tools_Menu_Settings:
+                Settings(hWnd, settingsSize, settingsSize);
+                break;
             case Help:
-
+                Settings(hWnd, settingsSize, settingsSize);
                 break;
             }
 

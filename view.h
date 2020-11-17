@@ -10,3 +10,5 @@ void DeleteBoard();
 void DestroyBitMap(int coord);
 void LoadBoard(HWND hWnd);
 void ResetBoard(HWND hWnd, int width, int height);
+void Settings(HWND hWnd, int width, int height);
+void LoadSettings(HWND hWnd);
