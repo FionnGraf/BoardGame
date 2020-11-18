@@ -2,19 +2,13 @@
 #define DEFINES_H
 #endif 
 
-#define boardHeight 7
-#define boardWidth 8
+#define boardHeight 3
+#define boardWidth 3
 #define buttonSize 60
-#define winAmount 4
-#define settingsItems 8
-#define settingsSize 300
+#define winAmount 3
 
 #define File_Menu_Exit 10001
 #define File_Menu_New 10002
 #define File_Menu_Open 10003
-
 #define Tools_Menu_Reset 10004
-#define Tools_Menu_Settings 10005
-#define Tools_Menu_Settings_Exit 10007
-
-#define Help 10006
+#define Help 10005

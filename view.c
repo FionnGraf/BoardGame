@@ -14,7 +14,6 @@ HWND hButton[99][99] = { 0 };
 HBITMAP hBMPx;
 HBITMAP hBMPo;
 HWND hBMP[99][99];
-HWND hSettings[8];
 int player = 0;
 int board[99][99] = { 0 };
 extern int moveCount;
@@ -69,7 +68,6 @@ void AddMenus(HWND hWnd) {
 
     AppendMenuA(hMenu, MF_POPUP, (UINT_PTR)ToolMenu, "Tools");
     AppendMenuA(ToolMenu, MF_POPUP, Tools_Menu_Reset, "Reset");
-    AppendMenuA(ToolMenu, MF_POPUP, Tools_Menu_Settings, "Settings");
 
     AppendMenuA(hMenu, MF_STRING, Help, "Help");
 
@@ -156,28 +154,4 @@ void ResetBoard(HWND hWnd, int width, int height) {
     DeleteBoard();
     CreateBoard(hWnd, width, height);
     moveCount = 0;
-}
-
-void Settings(HWND hWnd, int width, int height) {
-    DeleteBoard();
-    LoadSettings(hWnd);
-}
-
-void LoadSettings(HWND hWnd) {
-    hSettings[0] = CreateWindowW(L"static", L"Menu", WS_CHILD | WS_VISIBLE | WS_BORDER | SS_CENTER , 1, 1, 582, 25, hWnd, NULL, NULL, NULL);
-
-    hSettings[1] = CreateWindowW(L"static", L"Board Height", WS_CHILD | WS_VISIBLE | WS_BORDER | SS_CENTER, 1, 26, 100, 20, hWnd, NULL, NULL, NULL);
-    hSettings[2] = CreateWindowW(L"edit", L"3", WS_CHILD | WS_VISIBLE | WS_BORDER | SS_CENTER, 1, 46, 100, 20, hWnd, NULL, NULL, NULL);
-    hSettings[3] = CreateWindowW(L"static", L"Board Width", WS_CHILD | WS_VISIBLE | WS_BORDER | SS_CENTER, 1, 66, 100, 20, hWnd, NULL, NULL, NULL);
-    hSettings[4] = CreateWindowW(L"edit", L"3", WS_CHILD | WS_VISIBLE | WS_BORDER | SS_CENTER, 1, 86, 100, 20, hWnd, NULL, NULL, NULL);
-    hSettings[5] = CreateWindowW(L"static", L"Win Amount", WS_CHILD | WS_VISIBLE | WS_BORDER | SS_CENTER, 1, 106, 100, 20, hWnd, NULL, NULL, NULL);
-    hSettings[6] = CreateWindowW(L"edit", L"3", WS_CHILD | WS_VISIBLE | WS_BORDER | SS_CENTER, 1, 126, 100, 20, hWnd, NULL, NULL, NULL);
-
-    hSettings[7] = CreateWindowW(L"button", L"Exit", WS_VISIBLE | WS_CHILD | BS_FLAT | SS_CENTER, 1, 300, 582, 25, hWnd, Tools_Menu_Settings_Exit, NULL, NULL);
-}
-
-void DeleteSettings() {
-    for (int i = 0; i < settingsItems; i++) {
-        DestroyWindow(hSettings[i]);
-    }
 }

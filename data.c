@@ -17,25 +17,16 @@ int CheckBoard(int coord, int width, int height) {
     int x = coord / 100;
     int y = coord % 100;
     int counter[4] = { 1, 1, 1, 1 };
-    boolean stop[8] = {TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE};
     moveCount++;
     
     //check vertical
     for (int i = 1; i < winAmount; i++) {
-        if (CheckDirection(board[x][y], x, y + i) && stop[0]) {
+        if (CheckDirection(board[x][y], x, y + i)) {
             counter[0]++;
         }
-        else {
-            stop[0] = FALSE;
-        }
-
-        if (CheckDirection(board[x][y], x, y - i) && stop[1]) {
+        if (CheckDirection(board[x][y], x, y - i)) {
             counter[0]++;
         }
-        else {
-            stop[1] = FALSE;
-        }
-
         if (counter[0] == winAmount) {
             return 1;
         }
@@ -43,20 +34,12 @@ int CheckBoard(int coord, int width, int height) {
 
     //check horizontal
     for (int i = 1; i < winAmount; i++) {
-        if (CheckDirection(board[x][y], x + i, y) && stop[2]) {
+        if (CheckDirection(board[x][y], x + i, y)) {
             counter[1]++;
         }
-        else {
-            stop[2] = FALSE;
-        }
-
-        if (CheckDirection(board[x][y], x - i, y) && stop[3]) {
+        if (CheckDirection(board[x][y], x - i, y)) {
             counter[1]++;
         }
-        else {
-            stop[3] = FALSE;
-        }
-
         if (counter[1] == winAmount) {
             return 1;
         }
@@ -64,19 +47,12 @@ int CheckBoard(int coord, int width, int height) {
 
     //check diagonal
     for (int i = 1; i < winAmount; i++) {
-        if (CheckDirection(board[x][y], x + i, y + i) && stop[4]) {
+        if (CheckDirection(board[x][y], x + i, y + i)) {
             counter[2]++;
         }
-        else {
-            stop[4] = FALSE;
-        }
-        if (CheckDirection(board[x][y], x - i, y - i) && stop[5]) {
+        if (CheckDirection(board[x][y], x - i, y - i)) {
             counter[2]++;
         }
-        else {
-            stop[5] = FALSE;
-        }
-
         if (counter[2] == winAmount) {
             return 1;
         }
@@ -84,19 +60,12 @@ int CheckBoard(int coord, int width, int height) {
 
     //check anti diagonal
     for (int i = 1; i < winAmount; i++) {
-        if (CheckDirection(board[x][y], x + i, y - i) && stop[6]) {
+        if (CheckDirection(board[x][y], x + i, y - i)) {
             counter[3]++;
         }
-        else {
-            stop[6] = FALSE;
-        }
-        if (CheckDirection(board[x][y], x - i, y + i) && stop[7]) {
+        if (CheckDirection(board[x][y], x - i, y + i)) {
             counter[3]++;
         }
-        else {
-            stop[7] = FALSE;
-        }
-
         if (counter[3] == winAmount) {
             return 1;
         }
