@@ -18,7 +18,8 @@ HWND hSettings[8];
 int player = 0;
 int board[99][99] = { 0 };
 extern int moveCount;
-
+const wchar_t* items[] = { "Tic Tac Toe", "Connect 4" };
+HINSTANCE hInstance;
 // Funktionen ---------------------------------------------------------------------------
 
 int pWnd(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR args, int ncmdshow) {
