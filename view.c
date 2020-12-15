@@ -8,18 +8,23 @@
  #include "includes.h"
 
 // Globale Variablen---------------------------------------------------------------------
-
 HMENU hMenu;
-HWND hButton[99][99] = { 0 };
+HWND hSettings[8];
+
+HWND hButton[MAX_BOARD_SIZE][MAX_BOARD_SIZE] = { 0 };
+
 HBITMAP hBMPx;
 HBITMAP hBMPo;
-HWND hBMP[99][99];
-HWND hSettings[8];
-int player = 0;
-int board[99][99] = { 0 };
+HWND hBMP[MAX_BOARD_SIZE][MAX_BOARD_SIZE];
+
+int player = 0, buffer = 0;
+int temp;
+int board[MAX_BOARD_SIZE][MAX_BOARD_SIZE] = { 0 };
+int* pboard = board;
 extern int moveCount;
 const wchar_t* items[] = { "Tic Tac Toe", "Connect 4" };
 HINSTANCE hInstance;
+FILE* file_ptr = NULL;
 // Funktionen ---------------------------------------------------------------------------
 
 int pWnd(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR args, int ncmdshow) {
@@ -78,7 +83,8 @@ void AddMenus(HWND hWnd) {
 }
 
 void CreateBoard(HWND hWnd, int width, int height) {
-    if ((width < 99) && (height < 99)) {
+    SetBoardTo(0);
+    if ((width < MAX_BOARD_SIZE) && (height < MAX_BOARD_SIZE)) {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 hButton[x][y] = CreateWindowW(L"button", L"", WS_VISIBLE | WS_CHILD | BS_FLAT, x * buttonSize, y * buttonSize, buttonSize, buttonSize, hWnd, x * 100 + y, NULL, NULL);
@@ -90,12 +96,13 @@ void CreateBoard(HWND hWnd, int width, int height) {
         printf("tried to create a too big playing field\n");
         while (1);
     }
+    File_SaveBoard();
 }
 
 void DestroyButton(int coord) {
     int x = coord / 100;
     int y = coord % 100;
-    if ((x < 99) && (y < 99)) {
+    if ((x < MAX_BOARD_SIZE) && (y < MAX_BOARD_SIZE)) {
         DestroyWindow(hButton[x][y]);
     }
     else {
@@ -127,7 +134,7 @@ void LoadBitMap(HWND hWnd,int coord) {
 void DestroyBitMap(int coord) {
     int x = coord / 100;
     int y = coord % 100;
-    if ((x < 99) && (y < 99)) {
+    if ((x < MAX_BOARD_SIZE) && (y < MAX_BOARD_SIZE)) {
         DestroyWindow(hBMP[x][y]);
     }
     else {
@@ -154,6 +161,9 @@ void LoadBoard(HWND hWnd) {
 }
 
 void ResetBoard(HWND hWnd, int width, int height) {
+    if (hSettings != 0) {
+        DeleteSettings();
+    }
     DeleteBoard();
     CreateBoard(hWnd, width, height);
     moveCount = 0;
@@ -180,5 +190,41 @@ void LoadSettings(HWND hWnd) {
 void DeleteSettings() {
     for (int i = 0; i < settingsItems; i++) {
         DestroyWindow(hSettings[i]);
+    }
+}
+
+void File_SaveBoard() {
+    file_ptr = fopen("C:\\temp\\board.Fionn", "w");
+    if (file_ptr == NULL && file_ptr == 0) {
+        printf("error opening file");
+    }
+    else {
+            for (int i = 0; i < MAX_BOARD_SIZE; i++) {
+                for (int j = 0; j < MAX_BOARD_SIZE; j++) {
+                    if (board[j][i] != 0)
+                        fprintf(file_ptr, "%d,", board[j][i]);
+                }
+                fprintf(file_ptr, "\n");
+            } 
+        fclose(file_ptr);
+    }
+}
+
+void File_ReadBoard() {
+    //SetBoardTo(0);
+    file_ptr = fopen("C:\\temp\\board.Fionn", "r");
+    if (file_ptr == NULL && file_ptr == 0) {
+        printf("error opening file");
+    }
+    else {
+        for (int i = 0; i < MAX_BOARD_SIZE; i++) {
+            for (int j = 0; j < MAX_BOARD_SIZE; j++) {
+                fscanf(file_ptr, "%d,", &buffer);
+                printf("%d ", buffer);
+            }
+            printf("\n");
+        }
+        printf("\n");
+        fclose(file_ptr);
     }
 }

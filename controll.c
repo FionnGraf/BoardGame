@@ -9,7 +9,7 @@
 
 // Globale Variablen-----------------------------------------------------------------------
 extern int player;
-extern int board;
+extern int board[MAX_BOARD_SIZE][MAX_BOARD_SIZE];
 int test = 0;
 // Main -----------------------------------------------------------------------------------
 
@@ -41,6 +41,8 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
             if (wp < 10000) {
                 DestroyButton(wp);
                 LoadBitMap(hWnd, wp);
+                File_SaveBoard();
+                File_ReadBoard();
                 switch(CheckBoard(wp, boardWidth, boardHeight)){
                 case 1:
                     if (player == 1) {
@@ -71,6 +73,7 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
 
         case WM_DESTROY:
             PostQuitMessage(0);
+            File_SaveBoard();
             break;
 
         case WM_EXITSIZEMOVE:

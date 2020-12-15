@@ -4,3 +4,4 @@
 
 int CheckBoard(int coord, int width, int height);
 boolean CheckDirection(int player, int deltaX, int deltaY);
+void SetBoardTo(int value);

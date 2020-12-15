@@ -2,6 +2,7 @@
 #define DEFINES_H
 #endif 
 
+#define MAX_BOARD_SIZE 10
 #define boardHeight 7
 #define boardWidth 8
 #define buttonSize 60

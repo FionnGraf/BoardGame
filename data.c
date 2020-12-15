@@ -9,7 +9,7 @@
 
 // Globale Variablen-----------------------------------------------------------------------
 int amtRow[4] = { 0 };
-extern int board[99][99];
+extern int board[MAX_BOARD_SIZE][MAX_BOARD_SIZE];
 int moveCount = 0;
 
 // Funktionen ----------------------------------------------------------------------------
@@ -117,5 +117,13 @@ boolean CheckDirection(int player, int deltaX, int deltaY) {
     }
     else {
         return FALSE;
+    }
+}
+
+void SetBoardTo(int value) {
+    for (int i = 0; i < MAX_BOARD_SIZE; i++) {
+        for (int j = 0; j < MAX_BOARD_SIZE; j++) {
+            board[i][j] = value;
+        }
     }
 }
