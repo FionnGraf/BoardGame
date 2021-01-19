@@ -13,5 +13,5 @@ void ResetBoard(HWND hWnd, int width, int height);
 void Settings(HWND hWnd, int width, int height);
 void LoadSettings(HWND hWnd);
 void DeleteSettings();
-void File_SaveBoard();
-void File_ReadBoard();
+//void File_SaveBoard();
+//void File_ReadBoard();

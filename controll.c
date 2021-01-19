@@ -8,7 +8,7 @@
 #include "includes.h"
 
 // Globale Variablen-----------------------------------------------------------------------
-extern int player;
+extern enum PLAYER player;
 extern int board[MAX_BOARD_SIZE][MAX_BOARD_SIZE];
 int test = 0;
 // Main -----------------------------------------------------------------------------------
@@ -41,17 +41,17 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
             if (wp < 10000) {
                 DestroyButton(wp);
                 LoadBitMap(hWnd, wp);
-                File_SaveBoard();
-                File_ReadBoard();
+               /* File_SaveBoard();
+                File_ReadBoard();*/
                 switch(CheckBoard(wp, boardWidth, boardHeight)){
                 case 1:
-                    if (player == 1) {
-                        if (MessageBoxW(hWnd, L"Player 1 Won", L"Winner", MB_OK) == IDOK) {
+                    if (player == circle) {
+                        if (MessageBoxW(hWnd, L"Circle Won", L"Winner", MB_OK) == IDOK) {
                             ResetBoard(hWnd, boardWidth, boardHeight);
                         }
                     }
-                    else {
-                        if (MessageBoxW(hWnd, L"Player 2 Won", L"Winner", MB_OK) == IDOK) {
+                    else if (player == cross) {
+                        if (MessageBoxW(hWnd, L"Cross Won", L"Winner", MB_OK) == IDOK) {
                             ResetBoard(hWnd, boardWidth, boardHeight);
                         }
                     }
@@ -73,7 +73,7 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
 
         case WM_DESTROY:
             PostQuitMessage(0);
-            File_SaveBoard();
+            /*File_SaveBoard();*/
             break;
 
         case WM_EXITSIZEMOVE:

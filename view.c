@@ -17,7 +17,11 @@ HBITMAP hBMPx;
 HBITMAP hBMPo;
 HWND hBMP[MAX_BOARD_SIZE][MAX_BOARD_SIZE];
 
-int player = 0, buffer = 0;
+int buffer = 0;
+
+extern enum PLAYER player;
+player = cross;
+
 int temp;
 int board[MAX_BOARD_SIZE][MAX_BOARD_SIZE] = { 0 };
 int* pboard = board;
@@ -96,7 +100,7 @@ void CreateBoard(HWND hWnd, int width, int height) {
         printf("tried to create a too big playing field\n");
         while (1);
     }
-    File_SaveBoard();
+    /*File_SaveBoard();*/
 }
 
 void DestroyButton(int coord) {
@@ -117,15 +121,15 @@ void LoadBitMap(HWND hWnd,int coord) {
     hBMPo = LoadImageW(NULL, L"BMPo.bmp", IMAGE_BITMAP, buttonSize, buttonSize, LR_LOADFROMFILE);
     hBMP[x][y] = CreateWindowW(L"Static", L"", WS_CHILD | WS_VISIBLE | SS_BITMAP, x * buttonSize, y * buttonSize, buttonSize, buttonSize, hWnd, NULL, NULL, NULL);
     switch (player) {
-    case 0:
+    case cross:
         SendMessage(hBMP[x][y], STM_SETIMAGE, (WPARAM)IMAGE_BITMAP, (LPARAM)hBMPo);
-        player = 1;
+        player = circle;
         board[x][y] = 2;
         break;
 
-    case 1:
+    case circle:
         SendMessage(hBMP[x][y], STM_SETIMAGE, (WPARAM)IMAGE_BITMAP, (LPARAM)hBMPx);
-        player = 0;
+        player = cross;
         board[x][y] = 3;
         break;
     }
@@ -193,38 +197,37 @@ void DeleteSettings() {
     }
 }
 
-void File_SaveBoard() {
-    file_ptr = fopen("C:\\temp\\board.Fionn", "w");
-    if (file_ptr == NULL && file_ptr == 0) {
-        printf("error opening file");
-    }
-    else {
-            for (int i = 0; i < MAX_BOARD_SIZE; i++) {
-                for (int j = 0; j < MAX_BOARD_SIZE; j++) {
-                    if (board[j][i] != 0)
-                        fprintf(file_ptr, "%d,", board[j][i]);
-                }
-                fprintf(file_ptr, "\n");
-            } 
-        fclose(file_ptr);
-    }
-}
-
-void File_ReadBoard() {
-    //SetBoardTo(0);
-    file_ptr = fopen("C:\\temp\\board.Fionn", "r");
-    if (file_ptr == NULL && file_ptr == 0) {
-        printf("error opening file");
-    }
-    else {
-        for (int i = 0; i < MAX_BOARD_SIZE; i++) {
-            for (int j = 0; j < MAX_BOARD_SIZE; j++) {
-                fscanf(file_ptr, "%d,", &buffer);
-                printf("%d ", buffer);
-            }
-            printf("\n");
-        }
-        printf("\n");
-        fclose(file_ptr);
-    }
-}
+//void File_SaveBoard() {
+//    file_ptr = fopen("C:\\temp\\board.Fionn", "w");
+//    if (file_ptr == NULL && file_ptr == 0) {
+//        printf("error opening file");
+//    }
+//    else {
+//            for (int i = 0; i < MAX_BOARD_SIZE; i++) {
+//                for (int j = 0; j < MAX_BOARD_SIZE; j++) {
+//                    if (board[j][i] != 0)
+//                        fprintf(file_ptr, "%d,", board[j][i]);
+//                }
+//                fprintf(file_ptr, "\n");
+//            } 
+//        fclose(file_ptr);
+//    }
+//}
+//
+//void File_ReadBoard() {
+//    file_ptr = fopen("C:\\temp\\board.Fionn", "r");
+//    if (file_ptr == NULL && file_ptr == 0) {
+//        printf("error opening file");
+//    }
+//    else {
+//        for (int i = 3; i < MAX_BOARD_SIZE; i++) {
+//            for (int j = 2; j < MAX_BOARD_SIZE; j++) {
+//                fscanf(file_ptr, "%d,", &buffer);
+//                printf("%d ", buffer);
+//            }
+//            printf("\n");
+//        }
+//        printf("\n");
+//        fclose(file_ptr);
+//    }
+//}

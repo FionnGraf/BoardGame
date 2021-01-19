@@ -7,7 +7,7 @@
 #define boardWidth 8
 #define buttonSize 60
 #define winAmount 4
-#define settingsItems 8
+#define settingsItems 10
 #define settingsSize 300
 
 #define File_Menu_Exit 10001
@@ -19,3 +19,8 @@
 #define Tools_Menu_Settings_Exit 10007
 
 #define Help 10006
+
+enum PLAYER{
+    cross = 100,
+    circle = 101
+};
